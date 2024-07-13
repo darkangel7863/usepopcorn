@@ -55,24 +55,26 @@ export default function App() {
   const [watched, setWatched] = useState(tempWatchedData);
   return (
     <>
-      <NavBar>
+      <Navbar>
         <Search />
         <NumResults movies={movies} />
-      </NavBar>
+      </Navbar>
       <Main>
         <Box>
           <MovieList movies={movies} />
         </Box>
         <Box>
-          <WatchedSummary watched={watched} />
-          <WatchedMoviesList watched={watched} />
+          <>
+            <WatchedSummary watched={watched} />
+            <WatchedMoviesList watched={watched} />
+          </>
         </Box>
       </Main>
     </>
   );
 }
 
-function NavBar({ children }) {
+function Navbar({ children }) {
   return (
     <nav className="nav-bar">
       <Logo />
@@ -88,13 +90,6 @@ function Logo() {
     </div>
   );
 }
-function NumResults({ movies }) {
-  return (
-    <p className="num-results">
-      Found <strong>{movies.length}</strong> results
-    </p>
-  );
-}
 function Search() {
   const [query, setQuery] = useState('');
   return (
@@ -105,6 +100,13 @@ function Search() {
       value={query}
       onChange={e => setQuery(e.target.value)}
     />
+  );
+}
+function NumResults({ movies }) {
+  return (
+    <p className="num-results">
+      Found <strong>{movies.length}</strong> results
+    </p>
   );
 }
 function Main({ children }) {
@@ -121,6 +123,7 @@ function Box({ children }) {
     </div>
   );
 }
+
 function MovieList({ movies }) {
   return (
     <ul className="list">
@@ -182,7 +185,6 @@ function WatchedMoviesList({ watched }) {
     </ul>
   );
 }
-
 function WatchedMovie({ movie }) {
   return (
     <li>
