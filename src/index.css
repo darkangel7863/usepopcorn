@@ -143,6 +143,7 @@ body {
 
 .list-watched {
   height: calc(100% - 9rem);
+  overflow: auto;
 }
 
 .list li {
