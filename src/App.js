@@ -109,6 +109,7 @@ export default function App() {
         return;
       }
       fetchMovies();
+      return;
     },
     [query],
   );
@@ -259,6 +260,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [userRating, setUserRating] = useState('');
 
   const isWatched = watched.map(movie => movie.imdbID).includes(selectedId);
+
   const watchedUserRating = watched.find(
     movie => movie.imdbID === selectedId,
   )?.userRating;
@@ -303,6 +305,18 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
       getMovieDetails();
     },
     [selectedId],
+  );
+
+  useEffect(
+    function () {
+      if (!title) return;
+      document.title = `Movie | ${title}`;
+
+      return function () {
+        document.title = 'usePopcorn';
+      };
+    },
+    [title],
   );
 
   return (
@@ -391,7 +405,7 @@ function WatchedSummary({ watched }) {
         </p>
         <p>
           <span>⏳</span>
-          <span>{avgRuntime} min</span>
+          <span>{avgRuntime.toFixed(2)} min</span>
         </p>
       </div>
     </div>
