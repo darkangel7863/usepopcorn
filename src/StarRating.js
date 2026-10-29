@@ -47,7 +47,7 @@ export default function StarRating({
       style={containerStyle}
       className={className}
     >
-      <divs style={starContainerStyle}>
+      <div style={starContainerStyle}>
         {Array.from({ length: maxRating }, (_, i) => (
           <Star
             key={i}
@@ -59,7 +59,7 @@ export default function StarRating({
             size={size}
           />
         ))}
-      </divs>
+      </div>
       <p style={textStyle}>
         {messages.length === maxRating
           ? messages[tempRating ? tempRating - 1 : rating - 1]
